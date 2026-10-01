@@ -1,0 +1,634 @@
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل الأدوات الرقمية والذكاء الاصطناعي لطالبات الدراسات العليا</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+            colors: {
+                navy: { DEFAULT: '#1e3a8a', light: '#2563eb', dark: '#172554' },
+                brand: { purple: '#7c3aed', violet: '#8b5cf6' }
+            }
+        }
+    }
+}
+</script>
+<style>
+* { font-family: 'Cairo', sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%); min-height: 100vh; }
+.hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #4338ca 50%, #7c3aed 100%); position: relative; overflow: hidden; }
+.hero-bg::before, .hero-bg::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero-bg::before { top: -40%; right: -10%; width: 60%; height: 180%; background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%); }
+.hero-bg::after { bottom: -40%; left: -15%; width: 55%; height: 160%; background: radial-gradient(circle, rgba(167,139,250,0.35) 0%, transparent 60%); }
+.tool-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.tool-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.18); }
+.cat-btn { transition: all 0.2s ease; }
+.cat-btn:hover { transform: translateY(-1px); }
+.btn-primary { background: linear-gradient(135deg, #1e3a8a, #7c3aed); transition: all 0.3s; }
+.btn-primary:hover { box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4); filter: brightness(1.05); }
+.glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float-anim { animation: float 6s ease-in-out infinite; }
+@keyframes slideUp { 0% { transform: translateY(15px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+.animate-slide-up { animation: slideUp 0.4s ease-out both; }
+@keyframes scaleIn { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.animate-scale-in { animation: scaleIn 0.25s ease-out; }
+</style>
+</head>
+<body class="text-slate-800">
+
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-white/85 glass border-b border-slate-200">
+    <div class="container mx-auto px-4 sm:px-6 py-3">
+        <div class="flex items-center justify-between gap-3">
+            <a href="#" onclick="showPage('home'); return false;" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-navy to-brand-purple flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:scale-105 transition">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3L2 8L12 13L22 8L12 3Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M6 10.5V14C6 14 8 17 12 17C16 17 18 14 18 14V10.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="22" cy="8" r="1.4" fill="white"/>
+                        <path d="M22 9.5V13" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-base font-bold text-navy leading-tight">دليل الأدوات الرقمية</h1>
+                    <p class="text-[10px] sm:text-xs text-slate-500">والذكاء الاصطناعي لطالبات الدراسات العليا</p>
+                </div>
+            </a>
+            <nav class="flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-hide">
+                <button onclick="showPage('home')" data-nav="home" class="nav-link shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-navy/10 text-navy">الرئيسية</button>
+                <button onclick="showPage('masters')" data-nav="masters" class="nav-link shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">الأدوات المقترحة للماجستير</button>
+                <button onclick="showPage('howto')" data-nav="howto" class="nav-link shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">كيف أستخدم الأدوات؟</button>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- HOME PAGE -->
+<div id="page-home">
+    <!-- Hero -->
+    <section class="hero-bg text-white py-16 sm:py-24 px-4">
+        <div class="container mx-auto relative z-10 max-w-5xl text-center">
+            <div class="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/15 glass border border-white/20 mb-6 float-anim">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3L2 8L12 13L22 8L12 3Z" stroke="white" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M6 10.5V14C6 14 8 17 12 17C16 17 18 14 18 14V10.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="22" cy="8" r="1.2" fill="white"/>
+                    <path d="M22 9V12.5" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold mb-4 leading-tight px-2">دليل الأدوات الرقمية والذكاء الاصطناعي</h2>
+            <p class="text-base sm:text-lg text-white/90 mb-10 max-w-2xl mx-auto">دليلك الذكي لاكتشاف الأدوات التي تدعم التعلم والبحث والإبداع الأكاديمي</p>
+            <div class="relative max-w-2xl mx-auto">
+                <svg class="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input id="searchInput" type="text" placeholder="ابحثي عن أداة…" oninput="handleSearch()" class="w-full bg-white text-slate-800 rounded-2xl py-4 sm:py-5 pr-14 pl-5 text-base sm:text-lg shadow-2xl shadow-navy/30 outline-none focus:ring-4 focus:ring-white/30 transition" />
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 sm:gap-12 mt-12">
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold" id="statTools">0</div>
+                    <div class="text-xs sm:text-sm text-white/70">أداة رقمية</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold">12</div>
+                    <div class="text-xs sm:text-sm text-white/70">تصنيف رئيسي</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-extrabold" id="statFav">0</div>
+                    <div class="text-xs sm:text-sm text-white/70">في مفضلتك</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="sticky top-[68px] z-30 bg-slate-50/90 glass border-b border-slate-200 py-3 px-4">
+        <div class="container mx-auto max-w-7xl">
+            <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2 mb-3" id="categoryButtons"></div>
+            <div class="flex flex-wrap items-center gap-2 justify-between">
+                <div class="flex flex-wrap items-center gap-2">
+                    <select id="levelFilter" onchange="applyFilters()" class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 outline-none focus:ring-2 focus:ring-navy/30 cursor-pointer">
+                        <option value="all">كل المستويات</option>
+                        <option value="beginner">مبتدئ</option>
+                        <option value="intermediate">متوسط</option>
+                        <option value="advanced">متقدم</option>
+                    </select>
+                    <button id="sortBtn" onclick="toggleSort()" class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 transition flex items-center gap-1.5">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+                        <span id="sortLabel">ترتيب أبجدي</span>
+                    </button>
+                    <button id="favBtn" onclick="toggleFavoritesOnly()" class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 transition flex items-center gap-1.5">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                        <span>المفضلة فقط</span>
+                    </button>
+                </div>
+                <div class="text-sm text-slate-500 font-medium" id="resultsCount"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools grid -->
+    <section class="container mx-auto max-w-7xl px-4 py-10">
+        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+        <div id="emptyState" class="hidden text-center py-20">
+            <div class="text-6xl mb-4">🔍</div>
+            <h3 class="text-xl font-bold text-slate-700 mb-2">لا توجد نتائج مطابقة</h3>
+            <p class="text-slate-500 mb-4">جرّبي تعديل البحث أو الفلاتر</p>
+            <button onclick="resetFilters()" class="btn-primary text-white font-semibold px-5 py-2.5 rounded-xl">إعادة ضبط الفلاتر</button>
+        </div>
+    </section>
+</div>
+
+<!-- MASTERS PAGE -->
+<div id="page-masters" class="hidden">
+    <section class="hero-bg text-white py-14 px-4">
+        <div class="container mx-auto max-w-4xl text-center relative z-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 glass border border-white/20 mb-4 text-3xl">🎓</div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">الأدوات المقترحة للماجستير</h2>
+            <p class="text-white/80 max-w-xl mx-auto">مجموعات منظمة من الأدوات المناسبة لكل مرحلة من مراحل دراستك في الماجستير</p>
+        </div>
+    </section>
+    <section class="container mx-auto max-w-6xl px-4 py-10">
+        <div id="mastersContent" class="space-y-6"></div>
+    </section>
+</div>
+
+<!-- HOWTO PAGE -->
+<div id="page-howto" class="hidden">
+    <section class="hero-bg text-white py-14 px-4">
+        <div class="container mx-auto max-w-4xl text-center relative z-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 glass border border-white/20 mb-4 text-3xl">🧭</div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">كيف أستخدم الأدوات؟</h2>
+            <p class="text-white/80 max-w-xl mx-auto">ست خطوات عملية لاختيار واستخدام الأداة المناسبة لاحتياجك البحثي</p>
+        </div>
+    </section>
+    <section class="container mx-auto max-w-4xl px-4 py-12">
+        <div class="space-y-4" id="stepsContent"></div>
+        <div class="mt-10 bg-gradient-to-br from-navy to-brand-purple rounded-3xl p-8 text-white text-center">
+            <div class="text-3xl mb-3">✨</div>
+            <h3 class="text-xl font-bold mb-2">تذكّري دائماً</h3>
+            <p class="text-white/90 max-w-2xl mx-auto leading-relaxed">استخدمي الذكاء الاصطناعي كأداة مساعدة، مع التحقق من المعلومات والمصادر العلمية.</p>
+        </div>
+    </section>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-navy/60 glass" onclick="closeModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in" id="modalContent"></div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-navy text-white py-12 px-4 mt-10">
+    <div class="container mx-auto max-w-5xl text-center">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 mb-4">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3L2 8L12 13L22 8L12 3Z" stroke="white" stroke-width="1.5"/>
+                <path d="M6 10V14C6 14 8 17 12 17C16 17 18 14 18 14V10" stroke="white" stroke-width="1.5"/>
+            </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-1">دليل الأدوات الرقمية والذكاء الاصطناعي</h3>
+        <p class="text-white/70 text-sm mb-6">دليلك الذكي لاكتشاف الأدوات التي تدعم التعلم والبحث والإبداع الأكاديمي</p>
+        <div class="bg-white/10 rounded-2xl p-5 mb-6 inline-block max-w-2xl">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <svg width="18" height="18" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                <h4 class="font-semibold text-amber-300">تنبيه مهم</h4>
+            </div>
+            <p class="text-white/90 text-sm leading-relaxed">استخدمي الذكاء الاصطناعي كأداة مساعدة، مع التحقق من المعلومات والمصادر العلمية.</p>
+        </div>
+        <div class="border-t border-white/15 pt-6">
+            <p class="font-semibold text-lg mb-1">إعداد الطالبة: خلود يحي الغامدي</p>
+            <p class="text-white/70 text-sm">ماجستير تكنولوجيا التعليم</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+const categories = [
+    {id:'all', name:'كل الأدوات', icon:'✨', short:'الكل'},
+    {id:'research', name:'البحث العلمي والمراجع', icon:'📚', short:'البحث'},
+    {id:'writing', name:'الكتابة الأكاديمية', icon:'✍️', short:'الكتابة'},
+    {id:'brainstorm', name:'العصف الذهني والخرائط الذهنية', icon:'🧠', short:'العصف الذهني'},
+    {id:'design', name:'التصميم والإنفوجرافيك', icon:'🎨', short:'التصميم'},
+    {id:'presentation', name:'العروض التقديمية', icon:'📊', short:'العروض'},
+    {id:'organization', name:'تنظيم الدراسة والمشاريع', icon:'📋', short:'التنظيم'},
+    {id:'video', name:'صناعة الفيديو', icon:'🎬', short:'الفيديو'},
+    {id:'audio', name:'الصوت وتحويل الكلام إلى نص', icon:'🎙️', short:'الصوت'},
+    {id:'website', name:'تصميم المواقع', icon:'🌐', short:'المواقع'},
+    {id:'ai', name:'الذكاء الاصطناعي', icon:'🤖', short:'الذكاء الاصطناعي'},
+    {id:'data', name:'تحليل البيانات والإحصاء', icon:'📈', short:'البيانات'},
+    {id:'reading', name:'القراءة والتلخيص', icon:'📖', short:'القراءة'}
+];
+
+const levelMap = {
+    beginner: {name:'مبتدئ', cls:'bg-emerald-100 text-emerald-700'},
+    intermediate: {name:'متوسط', cls:'bg-amber-100 text-amber-700'},
+    advanced: {name:'متقدم', cls:'bg-rose-100 text-rose-700'}
+};
+
+const tools = [
+    {id:1,name:'Elicit',cats:['research'],desc:'مساعد بحث ذكي يحلل الأوراق العلمية ويستخرج البيانات الأساسية تلقائياً.',level:'intermediate',url:'https://elicit.com',icon:'E',long:'Elicit هو مساعد بحث علمي يستخدم الذكاء الاصطناعي لأتمتة مهام البحث، مثل تلخيص الأوراق العلمية واستخراج البيانات من عشرات الدراسات في وقت قصير.',tips:'استخدميه لاستخراج البيانات من أوراق متعددة ومقارنة نتائج الدراسات بسرعة.'},
+    {id:2,name:'Consensus',cats:['research'],desc:'محرك بحث يستجيب لأسئلتك العلمية بإجابات مدعومة بالأبحاث.',level:'beginner',url:'https://consensus.app',icon:'C',long:'Consensus محرك بحث مدعوم بالذكاء الاصطناعي يبحث في قاعدة بيانات الأبحاث ويقدم إجابات مستندة إلى أدلة علمية.',tips:'اطرحي أسئلة محددة للحصول على إجابات مبنية على دراسات منشورة.'},
+    {id:3,name:'Perplexity',cats:['research','ai'],desc:'محرك بحث ذكي يقدم إجابات مع المصادر والتوثيق.',level:'beginner',url:'https://perplexity.ai',icon:'P',long:'Perplexity يجمع بين البحث والإجابات المباشرة مع الإشارة إلى المصادر، ما يجعله أداة قوية للبحث السريع.',tips:'استخدمي خاصية Focus للبحث في مصادر أكاديمية فقط.'},
+    {id:4,name:'ResearchRabbit',cats:['research'],desc:'منصة لاكتشاف الأبحاث ذات الصلة وتنظيم المراجع بصرياً.',level:'intermediate',url:'https://researchrabbit.ai',icon:'R',long:'ResearchRabbit يكتشف الأبحاث المرتبطة ويبني شبكة بصرية من المراجع، ما يساعد على توسيع نطاق المراجعة الأدبية.',tips:'ابدئي بإضافة ورقة محورية وشاهدي كيف تتفرع الأبحاث المرتبطة.'},
+    {id:5,name:'Connected Papers',cats:['research'],desc:'استكشاف الأبحاث المرتبطة بصورة بصرية مترابطة.',level:'intermediate',url:'https://connectedpapers.com',icon:'C',long:'Connected Papers يبني خريطة بصرية للأوراق العلمية المرتبطة بورقة معينة، ما يسهل اكتشاف المراجع ذات الصلة.',tips:'أدخلي ورقة أساسية لتوليد خريطة شاملة بأبحاث ذات صلة.'},
+    {id:6,name:'Semantic Scholar',cats:['research'],desc:'قاعدة بيانات بحثية مدعومة بالذكاء الاصطناعي.',level:'intermediate',url:'https://semanticscholar.org',icon:'S',long:'Semantic Scholar قاعدة بيانات بحثية مجانية تستخدم الذكاء الاصطناعي لتحليل الأوراق وتلخيصها وتصنيفها.',tips:'استخدمي الفلاتر المتقدمة لتضييق نطاق البحث.'},
+    {id:7,name:'Litmaps',cats:['research'],desc:'منصة لخريطة الأبحاث وتتبع المراجع بصرياً.',level:'intermediate',url:'https://litmaps.com',icon:'L',long:'Litmaps أداة بصرية لبناء خريطة شاملة للأبحاث وتتبع العلاقات بينها عبر الزمن.',tips:'استخدميها لبناء خريطة الأدبيات للفصل الثاني.'},
+    {id:8,name:'Scite',cats:['research'],desc:'أداة لتحليل الاستشهادات والتحقق من موثوقية المصادر.',level:'advanced',url:'https://scite.ai',icon:'S',long:'Scite يوفر تحليلاً ذكياً للاستشهادات، يميز بين الاستشهادات الداعمة والمعارضة للحصول على رؤية أوضح.',tips:'تحققي من قوة ومصداقية المصادر قبل الاستشهاد بها.'},
+    {id:9,name:'Zotero',cats:['research','organization'],desc:'أداة قوية ومجانية لإدارة المراجع والاستشهادات.',level:'intermediate',url:'https://zotero.org',icon:'Z',long:'Zotero أداة شائعة ومجانية لإدارة المراجع، تجمع المصادر وتنظمها وتنسّق الاستشهادات تلقائياً.',tips:'ثبّتي إضافة المتصفح لحفظ المصادر بنقرة واحدة.'},
+    {id:10,name:'Mendeley',cats:['research'],desc:'مدير مراجع علمي مع شبكة باحثين وقراءة PDF.',level:'intermediate',url:'https://mendeley.com',icon:'M',long:'Mendeley يجمع بين إدارة المراجع والقراءة والشبكة الاجتماعية للباحثين، ما يسهل التعاون الأكاديمي.',tips:'استخدمي ميزة التظليل والتعليق داخل ملفات PDF.'},
+
+    {id:11,name:'ChatGPT',cats:['writing','ai'],desc:'مساعد ذكي للمحادثة والمساعدة في الكتابة والتحليل.',level:'beginner',url:'https://chatgpt.com',icon:'C',long:'ChatGPT من OpenAI نموذج لغوي ضخم يمكنه المساعدة في صياغة الأفكار والتحرير والإجابة على الأسئلة بمستويات متقدمة.',tips:'استخدمي تعليمات محددة (Prompts) للحصول على نتائج أدق وتحققي دائماً من المعلومات.'},
+    {id:12,name:'Claude',cats:['writing','ai'],desc:'مساعد ذكي قوي للكتابة والتحليل ومعالجة النصوص الطويلة.',level:'beginner',url:'https://claude.ai',icon:'C',long:'Claude من Anthropic نموذج ذكي يتميز بقدرته على معالجة نصوص طويلة، ما يجعله مناسباً للأبحاث الأكاديمية.',tips:'ارفعي ملفات PDF واطلبي تلخيصها أو تحليلها.'},
+    {id:13,name:'Gemini',cats:['writing','ai'],desc:'مساعد Google الذكي للمهام المتعددة والبحث.',level:'beginner',url:'https://gemini.google.com',icon:'G',long:'Gemini مساعد Google متعدد المهام، يدعم الكتابة والبحث والتحليل مع تكامل مع خدمات Google.',tips:'استخدميه لتلخيص محتوى من YouTube أو استكشاف مواضيع بحثية.'},
+    {id:14,name:'Microsoft Copilot',cats:['writing','ai'],desc:'مساعد Microsoft الذكي المتكامل مع Office.',level:'beginner',url:'https://copilot.microsoft.com',icon:'M',long:'Microsoft Copilot مدمج داخل Word وPowerPoint وExcel، ما يسهل الكتابة والتحرير مباشرة داخل البرامج.',tips:'استخدميه داخل Word لتحرير النصوص وتحسينها مباشرة.'},
+    {id:15,name:'Grammarly',cats:['writing'],desc:'أداة لتحسين الكتابة وتصحيح الأخطاء اللغوية.',level:'beginner',url:'https://grammarly.com',icon:'G',long:'Grammarly مدقق لغوي ذكي يصحح الأخطاء ويقترح تحسينات على الأسلوب والوضوح والنبرة.',tips:'ثبّتي الإضافة لتدقيق الكتابة في كل المواقع.'},
+    {id:16,name:'QuillBot',cats:['writing'],desc:'أداة لإعادة الصياغة وتحسين النصوص وتلخيصها.',level:'beginner',url:'https://quillbot.com',icon:'Q',long:'QuillBot أداة شائعة لإعادة الصياغة والتلخيص وتحسين الأسلوب اللغوي.',tips:'استخدمي وضع Paraphrase لإعادة صياغة الجمل بأساليب مختلفة.'},
+    {id:17,name:'Wordtune',cats:['writing'],desc:'أداة لتحسين الجمل وتنويع الصياغة بكفاءة.',level:'intermediate',url:'https://wordtune.com',icon:'W',long:'Wordtune يقترح صياغات بديلة للجمل لتحسين الوضوح والأسلوب.',tips:'اختاري صياغات تناسب النبرة الأكاديمية المطلوبة.'},
+    {id:18,name:'LanguageTool',cats:['writing'],desc:'مدقق لغوي متعدد اللغات يدعم العربية.',level:'beginner',url:'https://languagetool.org',icon:'L',long:'LanguageTool مدقق لغوي مجاني يدعم لغات متعددة بما فيها العربية، يصحح الأخطاء النحوية والإملائية.',tips:'مفيد لتدقيق النصوص العربية قبل النشر.'},
+    {id:19,name:'DeepL',cats:['writing'],desc:'أداة ترجمة دقيقة بالذكاء الاصطناعي تدعم العربية.',level:'beginner',url:'https://deepl.com',icon:'D',long:'DeepL أداة ترجمة معروفة بدقتها العالية ووضوحها، تدعم العربية والعديد من اللغات.',tips:'استخدميها لترجمة المراجع بدقة أكبر من الترجمة التقليدية.'},
+    {id:20,name:'Writefull',cats:['writing','ai'],desc:'مساعد كتابة أكاديمي مخصص للباحثين.',level:'advanced',url:'https://writefull.com',icon:'W',long:'Writefull مخصص للكتابة الأكاديمية، يحلل اللغة في الأبحاث المنشورة ويقدم اقتراحات لتحسين الصياغة.',tips:'مدمج مع Word وOverleaf، مناسب لرسائل الماجستير.'},
+
+    {id:21,name:'Miro',cats:['brainstorm'],desc:'لوحة تعاونية للخرائط الذهنية والعصف الذهني.',level:'intermediate',url:'https://miro.com',icon:'M',long:'Miro لوحة بيضاء رقمية تعاونية تتيح بناء الخرائط الذهنية والتنظيم البصري للأفكار مع الفريق.',tips:'استخدمي القوالب الجاهزة للعصف الذهني.'},
+    {id:22,name:'MindMeister',cats:['brainstorm'],desc:'إنشاء خرائط ذهنية تفاعلية وجميلة بسهولة.',level:'beginner',url:'https://mindmeister.com',icon:'M',long:'MindMeister منصة متخصصة في بناء الخرائط الذهنية بأنماط متنوعة وجذابة.',tips:'جربي أنماط العرض المختلفة لتناسب طبيعة الفكرة.'},
+    {id:23,name:'XMind',cats:['brainstorm'],desc:'برنامج قوي لإنشاء الخرائط الذهنية الاحترافية.',level:'intermediate',url:'https://xmind.net',icon:'X',long:'XMind برنامج متخصص لإنشاء خرائط ذهنية متقدمة مع أنماط عرض متعددة.',tips:'استخدمي وضع Logic Chart للهياكل المنطقية.'},
+    {id:24,name:'Coggle',cats:['brainstorm'],desc:'أداة بسيطة وأنيقة لإنشاء الخرائط الذهنية.',level:'beginner',url:'https://coggle.it',icon:'C',long:'Coggle أداة بسيطة وسهلة لبناء خرائط ذهنية ملونة وتعاونية.',tips:'مناسبة للمبتدئات في العصف الذهني.'},
+    {id:25,name:'Whimsical',cats:['brainstorm','design'],desc:'منصة شاملة للمخططات والخرائط واللوحات.',level:'intermediate',url:'https://whimsical.com',icon:'W',long:'Whimsical يجمع بين الخرائط الذهنية والمخططات الانسيابية ولوحات العصف الذهني في مكان واحد.',tips:'استخدمي المخططات الانسيابية لتنظيم خطوات البحث.'},
+    {id:26,name:'Napkin AI',cats:['brainstorm','ai'],desc:'تحويل النص إلى خرائط ذهنية ومخططات تلقائياً.',level:'intermediate',url:'https://napkin.ai',icon:'N',long:'Napkin AI يحول النصوص تلقائياً إلى مخططات بصرية وخرائط ذهنية.',tips:'اكتبي فكرتك نصياً ودعي الأداة تحولها إلى مخطط.'},
+    {id:27,name:'FigJam',cats:['brainstorm'],desc:'لوحة عصف ذهني تعاونية من Figma.',level:'intermediate',url:'https://figma.com/figjam',icon:'F',long:'FigJam لوحة تعاونية من Figma تتيح العصف الذهني والرسم التخطيطي مع الفريق لحظياً.',tips:'مفيدة لجلسات العصف الذهني الجماعية.'},
+    {id:28,name:'Creately',cats:['brainstorm'],desc:'إنشاء المخططات والخرائط الذهنية بمئات القوالب.',level:'intermediate',url:'https://creately.com',icon:'C',long:'Creately منصة قوية لإنشاء المخططات الانسيابية والخرائط الذهنية بمئات القوالب الجاهزة.',tips:'استخدمي قوالب الدراسات لتنظيم الإطار النظري.'},
+    {id:29,name:'EdrawMind',cats:['brainstorm'],desc:'برنامج شامل للخرائط الذهنية والتنظيم البصري.',level:'intermediate',url:'https://edrawmind.com',icon:'E',long:'EdrawMind برنامج شامل لبناء الخرائط الذهنية والعروض التخطيطية.',tips:'صدّري الخرائط إلى PDF أو صورة لإدراجها في البحث.'},
+    {id:30,name:'GitMind',cats:['brainstorm'],desc:'خرائط ذهنية سحابية مجانية وسهلة الاستخدام.',level:'beginner',url:'https://gitmind.com',icon:'G',long:'GitMind منصة مجانية لإنشاء الخرائط الذهنية عبر المتصفح بدون تثبيت.',tips:'مناسبة لمن تريد أداة سريعة ومجانية.'},
+    {id:31,name:'Mapify',cats:['brainstorm','ai'],desc:'أداة ذكية لتوليد الخرائط الذهنية من النصوص.',level:'beginner',url:'https://mapify.so',icon:'M',long:'Mapify أداة ذكية تحول النصوص والمحادثات إلى خرائط ذهنية بصرية.',tips:'ارفعي ملف PDF واتركي الأداة تبني الخريطة.'},
+    {id:32,name:'Ayoa',cats:['brainstorm','organization'],desc:'دمج الخرائط الذهنية مع إدارة المهام.',level:'intermediate',url:'https://ayoa.com',icon:'A',long:'Ayoa تجمع بين الخرائط الذهنية وإدارة المهام بأسلوب مرن.',tips:'مفيدة لربط الأفكار بالمهام المطلوبة.'},
+    {id:33,name:'MindNode',cats:['brainstorm'],desc:'خرائط ذهنية أنيقة لـ Mac وiOS.',level:'beginner',url:'https://mindnode.com',icon:'M',long:'MindNode تطبيق أنيق لإنشاء الخرائط الذهنية على أجهزة Apple.',tips:'مثالي لمستخدمات Mac لتنظيم الأفكار.'},
+    {id:34,name:'Milanote',cats:['brainstorm','organization'],desc:'لوحات إبداعية لتنظيم الأفكار والمراجع بصرياً.',level:'intermediate',url:'https://milanote.com',icon:'M',long:'Milanote لوحة إبداعية لتنظيم الأفكار والصور والمراجع في مكان واحد.',tips:'استخدميها لبناء لوحة مرئية للإطار النظري.'},
+    {id:35,name:'Boardmix',cats:['brainstorm'],desc:'لوحة تعاونية شاملة للعصف الذهني والمخططات.',level:'intermediate',url:'https://boardmix.com',icon:'B',long:'Boardmix لوحة تعاونية شاملة للعصف الذهني وبناء المخططات مع الفريق.',tips:'مفيدة لجلسات العمل الجماعي عن بُعد.'},
+
+    {id:36,name:'Canva',cats:['design'],desc:'منصة تصميم شاملة وسهلة الاستخدام للجميع.',level:'beginner',url:'https://canva.com',icon:'C',long:'Canva منصة تصميم شاملة تتيح إنشاء إنفوجرافيك وعروض ولوحات تعليمية بسهولة.',tips:'استخدمي القوالب الأكاديمية الجاهزة للإنفوجرافيك.'},
+    {id:37,name:'Visme',cats:['design'],desc:'إنشاء عروض وإنفوجرافيك احترافي.',level:'intermediate',url:'https://visme.co',icon:'V',long:'Visme أداة تصميم متخصصة في الإنفوجرافيك والعروض التقديمية الاحترافية.',tips:'مفيدة لتحويل بيانات البحث إلى إنفوجرافيك.'},
+    {id:38,name:'Piktochart',cats:['design'],desc:'أداة متخصصة لإنشاء الإنفوجرافيك.',level:'intermediate',url:'https://piktochart.com',icon:'P',long:'Piktochart منصة متخصصة لإنشاء الإنفوجرافيك والعروض التفاعلية.',tips:'مثالية لعرض نتائج الإحصاءات بصرياً.'},
+    {id:39,name:'Adobe Express',cats:['design'],desc:'أدوات تصميم سريعة وقوية من Adobe.',level:'beginner',url:'https://new.express.adobe.com',icon:'A',long:'Adobe Express منصة تصميم سريعة من Adobe تنافس Canva في السهولة.',tips:'مفيدة لتصميم صور احترافية للعروض.'},
+
+    {id:40,name:'Gamma',cats:['presentation','ai'],desc:'إنشاء عروض تقديمية ومستندات بالذكاء الاصطناعي.',level:'beginner',url:'https://gamma.app',icon:'G',long:'Gamma أداة ذكية تنشئ عروضاً تقديمية كاملة من نص بسيط خلال ثوانٍ.',tips:'أدخلي عنوان البحث ودعي الأداة تبني العرض.'},
+    {id:41,name:'Beautiful.ai',cats:['presentation','ai'],desc:'عروض تقديمية ذكية بتصميم تلقائي احترافي.',level:'intermediate',url:'https://beautiful.ai',icon:'B',long:'Beautiful.ai يضبط التصميم تلقائياً للحصول على عروض متوازنة وأنيقة.',tips:'يضمن تناسق التصميم طوال العرض.'},
+    {id:42,name:'Tome',cats:['presentation','ai'],desc:'إنشاء عروض تقديمية بالذكاء الاصطناعي.',level:'beginner',url:'https://tome.app',icon:'T',long:'Tome أداة ذكية لإنشاء عروض تقديمية سردية جذابة بسرعة.',tips:'مناسبة لرواية قصة البحث بصرياً.'},
+    {id:43,name:'Prezi',cats:['presentation'],desc:'عروض تقديمية ديناميكية وغير تقليدية.',level:'intermediate',url:'https://prezi.com',icon:'P',long:'Prezi يتميز بالحركة والانتقالات السلسة بين الأفكار، ما يجعل العرض أكثر تفاعلاً.',tips:'استخدمي الانتقالات بحذر لتجنب التشتيت.'},
+    {id:44,name:'PowerPoint',cats:['presentation'],desc:'برنامج العروض التقديمية الشهير من Microsoft.',level:'beginner',url:'https://microsoft.com/powerpoint',icon:'P',long:'PowerPoint البرنامج الأشهر للعروض التقديمية، يدعمه الآن Copilot للتصميم الذكي.',tips:'استخدمي Designer لتحسين الشرائح تلقائياً.'},
+    {id:45,name:'Google Slides',cats:['presentation'],desc:'عروض تقديمية سحابية مجانية من Google.',level:'beginner',url:'https://slides.google.com',icon:'G',long:'Google Slides عروض سحابية مجانية تتيح التعاون اللحظي.',tips:'مناسبة للعروض الجماعية والتعاون عن بُعد.'},
+
+    {id:46,name:'Notion',cats:['organization'],desc:'مساحة عمل شاملة لإدارة الملاحظات والمشاريع.',level:'intermediate',url:'https://notion.so',icon:'N',long:'Notion مساحة عمل متكاملة للملاحظات والمشاريع وقواعد البيانات.',tips:'استخدميها لبناء نظام كامل لإدارة البحث.'},
+    {id:47,name:'Trello',cats:['organization'],desc:'لوحات كانبان بصرية لإدارة المهام.',level:'beginner',url:'https://trello.com',icon:'T',long:'Trello يستخدم لوحات كانبان لتنظيم المهام بصرياً.',tips:'أنشئي لوحة لكل مرحلة من مراحل البحث.'},
+    {id:48,name:'ClickUp',cats:['organization'],desc:'منصة شاملة لإدارة المشاريع والمهام.',level:'advanced',url:'https://clickup.com',icon:'C',long:'ClickUp منصة شاملة لإدارة المشاريع تتضمن مهام وأهداف وتقارير.',tips:'مناسبة لإدارة مشاريع البحث المعقدة.'},
+    {id:49,name:'Todoist',cats:['organization'],desc:'أداة بسيطة وفعالة لقوائم المهام.',level:'beginner',url:'https://todoist.com',icon:'T',long:'Todoist أداة بسيطة لتنظيم المهام اليومية بسهولة.',tips:'مفيدة لتنظيم مهام القراءة والكتابة اليومية.'},
+    {id:50,name:'Taskade',cats:['organization','ai'],desc:'إدارة المهام والتعاون مدعومة بالذكاء الاصطناعي.',level:'intermediate',url:'https://taskade.com',icon:'T',long:'Taskade منصة شاملة لإدارة المهام والمشاريع والتعاون بفضل الذكاء الاصطناعي.',tips:'استخدمي قوالب المشاريع الجاهزة.'},
+    {id:51,name:'Obsidian',cats:['organization'],desc:'نظام ملاحظات متصل قوي للمعرفة.',level:'advanced',url:'https://obsidian.md',icon:'O',long:'Obsidian نظام ملاحظات محلي قائم على روابط بين الملاحظات لبناء شبكة معرفة.',tips:'مثالي لبناء قاعدة معرفية للبحث.'},
+    {id:52,name:'Evernote',cats:['organization'],desc:'تدوين الملاحظات وتنظيمها عبر الأجهزة.',level:'beginner',url:'https://evernote.com',icon:'E',long:'Evernote منصة كلاسيكية للملاحظات تدعم النصوص والصور والصوت.',tips:'استخدمي Web Clipper لحفظ المقالات من المتصفح.'},
+    {id:53,name:'Google Keep',cats:['organization'],desc:'ملاحظات سريعة وملونة من Google.',level:'beginner',url:'https://keep.google.com',icon:'G',long:'Google Keep أداة ملاحظات سريعة وبسيطة من Google.',tips:'مناسبة لتدوين الأفكار العابرة بسرعة.'},
+    {id:54,name:'OneNote',cats:['organization'],desc:'دفتر ملاحظات رقمي من Microsoft.',level:'beginner',url:'https://onenote.com',icon:'O',long:'OneNote دفتر رقمي مرن لتنظيم الملاحظات بأقسام وصفحات.',tips:'استخدمي الأقسام لتنظيم فصول البحث.'},
+    {id:55,name:'Google Drive',cats:['organization'],desc:'تخزين سحابي وملفات مع تعاون كامل.',level:'beginner',url:'https://drive.google.com',icon:'G',long:'Google Drive تخزين سحابي مع مشاركة وتعاون على الملفات.',tips:'أنشئي مجلد لكل فصل من فصول البحث.'},
+
+    {id:56,name:'CapCut',cats:['video'],desc:'مونتاج فيديو سهل ومجاني بميزات ذكية.',level:'beginner',url:'https://capcut.com',icon:'C',long:'CapCut أداة مونتاج فيديو شاملة ومجانية مع ميزات ذكية تلقائية.',tips:'استخدمي القوالب لإنشاء فيديو تعليمي سريع.'},
+    {id:57,name:'Pictory',cats:['video','ai'],desc:'تحويل النص إلى فيديو بالذكاء الاصطناعي.',level:'intermediate',url:'https://pictory.ai',icon:'P',long:'Pictory يحول النصوص والمقالات إلى فيديوهات تلقائياً.',tips:'مفيد لتحويل محتوى تعليمي إلى فيديو.'},
+    {id:58,name:'Synthesia',cats:['video','ai'],desc:'إنشاء فيديو بمقدّم افتراضي واقعي.',level:'intermediate',url:'https://synthesia.io',icon:'S',long:'Synthesia ينشئ فيديوهات بمقدمين افتراضيين بدون كاميرا.',tips:'مفيدة لإنشاء محتوى تعليمي احترافي.'},
+    {id:59,name:'Runway',cats:['video','ai'],desc:'أدوات ذكاء اصطناعي متقدمة للفيديو.',level:'advanced',url:'https://runwayml.com',icon:'R',long:'Runway منصة إبداعية تقدم أدوات ذكاء اصطناعي لإنتاج وتحرير الفيديو.',tips:'استخدمي ميزة Gen-3 لإنشاء مقاطع من نصوص.'},
+    {id:60,name:'InVideo',cats:['video','ai'],desc:'إنشاء فيديو احترافي من نص وقوالب.',level:'beginner',url:'https://invideo.io',icon:'I',long:'InVideo منصة لإنشاء فيديوهات احترافية بسهولة من قوالب جاهزة.',tips:'اختاري قالباً تعليمياً وعدّلي المحتوى.'},
+    {id:61,name:'Animaker',cats:['video'],desc:'إنشاء فيديوهات رسوم متحركة بسهولة.',level:'intermediate',url:'https://animaker.com',icon:'A',long:'Animaker منصة لإنشاء فيديوهات رسوم متحركة بتكلفة منخفضة.',tips:'مفيدة لشرح المفاهيم المعقدة.'},
+    {id:62,name:'FlexClip',cats:['video'],desc:'مونتاج فيديو سحابي سهل وبسيط.',level:'beginner',url:'https://flexclip.com',icon:'F',long:'FlexClip محرر فيديو سحابي سهل الاستخدام مع قوالب جاهزة.',tips:'مناسب للمبتدئات في تحرير الفيديو.'},
+    {id:63,name:'Loom',cats:['video','audio'],desc:'تسجيل الشاشة والمشاركة بسرعة.',level:'beginner',url:'https://loom.com',icon:'L',long:'Loom أداة لتسجيل الشاشة والكاميرا وإرسال الفيديو بسهولة.',tips:'مفيدة لتسجيل شرح العروض التقديمية.'},
+
+    {id:64,name:'Otter.ai',cats:['audio','ai'],desc:'تحويل الكلام إلى نص في الاجتماعات والمحاضرات.',level:'beginner',url:'https://otter.ai',icon:'O',long:'Otter.ai يحول الكلام إلى نص لحظياً مع تلخيص للاجتماعات والمحاضرات.',tips:'استخدميها لتدوين المحاضرات تلقائياً.'},
+    {id:65,name:'Whisper',cats:['audio','ai'],desc:'نموذج OpenAI لتحويل الصوت إلى نص بدقة.',level:'advanced',url:'https://openai.com/whisper',icon:'W',long:'Whisper نموذج OpenAI مفتوح المصدر لتحويل الصوت إلى نص بعدة لغات.',tips:'يستخدم عبر API أو محلياً للنصوص الطويلة.'},
+    {id:66,name:'Descript',cats:['audio','video'],desc:'تحرير الصوت والفيديو بتحرير النص.',level:'intermediate',url:'https://descript.com',icon:'D',long:'Descript يحرر الصوت والفيديو بتحرير النص المنسوخ مباشرة.',tips:'احذفي الكلمات الزائدة بنقرة واحدة.'},
+    {id:67,name:'Sonix',cats:['audio'],desc:'تحويل صوتي دقيق وترجمة لعدة لغات.',level:'intermediate',url:'https://sonix.ai',icon:'S',long:'Sonix خدمة نسخ صوتي وترجمة دقيقة لعدة لغات.',tips:'مفيدة لنسخ المقابلات البحثية.'},
+    {id:68,name:'Rev',cats:['audio'],desc:'خدمة نسخ وترجمة احترافية بشرية وآلية.',level:'beginner',url:'https://rev.com',icon:'R',long:'Rev خدمة نسخ وترجمة احترافية بمزيج من البشر والذكاء الاصطناعي.',tips:'مفيدة عند الحاجة لدقة عالية في النسخ.'},
+
+    {id:69,name:'Wix',cats:['website'],desc:'بناء مواقع احترافية بدون برمجة.',level:'beginner',url:'https://wix.com',icon:'W',long:'Wix منصة بناء مواقع شهيرة بدون برمجة مع قوالب جاهزة ومحرر بالسحب والإفلات.',tips:'مناسبة لإنشاء موقع تعليمي بسرعة.'},
+    {id:70,name:'Webflow',cats:['website'],desc:'تصميم مواقع احترافي بمرونة عالية.',level:'advanced',url:'https://webflow.com',icon:'W',long:'Webflow منصة تصميم مواقع احترافية بمرونة عالية دون كتابة كود.',tips:'تتطلب بعض المعرفة بمفاهيم التصميم.'},
+    {id:71,name:'Framer',cats:['website'],desc:'تصميم ونشر مواقع حديثة وأنيقة.',level:'intermediate',url:'https://framer.com',icon:'F',long:'Framer منصة تصميم ونشر مواقع حديثة بسرعة عالية.',tips:'مناسبة لبناء مواقع تفاعلية بسرعة.'},
+    {id:72,name:'WordPress',cats:['website'],desc:'منصة إدارة المحتوى الأشهر عالمياً.',level:'intermediate',url:'https://wordpress.com',icon:'W',long:'WordPress منصة إدارة محتوى شهيرة وقابلة للتوسعة بآلاف الإضافات.',tips:'مناسبة لبناء مواقع تعليمية متكاملة.'},
+    {id:73,name:'Squarespace',cats:['website'],desc:'مواقع أنيقة وجاهزة بأقوى التصاميم.',level:'beginner',url:'https://squarespace.com',icon:'S',long:'Squarespace منصة بناء مواقع تتميز بالتصاميم الأنيقة والجاهزة.',tips:'مثالية للمعارض الرقمية ومنصات الأعمال.'},
+
+    {id:74,name:'Midjourney',cats:['ai','design'],desc:'توليد الصور بالذكاء الاصطناعي بجودة عالية.',level:'intermediate',url:'https://midjourney.com',icon:'M',long:'Midjourney أداة لتوليد الصور بالذكاء الاصطناعي بجودة فنية عالية.',tips:'استخدميه لإنشاء صور للعروض والمحتوى التعليمي.'},
+    {id:75,name:'Leonardo AI',cats:['ai','design'],desc:'توليد صور احترافية بتحكم كامل.',level:'intermediate',url:'https://leonardo.ai',icon:'L',long:'Leonardo AI منصة توليد صور تتميز بتحكم دقيق في الأسلوب والمعلمات.',tips:'مفيدة لتوليد صور متناسقة للعروض.'},
+    {id:76,name:'ElevenLabs',cats:['ai','audio'],desc:'توليد أصوات واقعية بجودة عالية.',level:'intermediate',url:'https://elevenlabs.io',icon:'E',long:'ElevenLabs منصة لتوليد أصوات طبيعية واقعية بالذكاء الاصطناعي.',tips:'استخدميه للتعليق الصوتي على الفيديوهات التعليمية.'},
+
+    {id:77,name:'Excel',cats:['data'],desc:'جداول وحسابات إحصائية وتحليل.',level:'beginner',url:'https://microsoft.com/excel',icon:'E',long:'Microsoft Excel أداة الجداول الأشهر للتحليل الإحصائي الأساسي.',tips:'استخدمي Data Analysis ToolPak للإحصاء.'},
+    {id:78,name:'Google Sheets',cats:['data'],desc:'جداول سحابية تعاونية من Google.',level:'beginner',url:'https://sheets.google.com',icon:'G',long:'Google Sheets جداول سحابية مجانية تتيح التعاون اللحظي.',tips:'استخدمي الدوال الإحصائية لتحليل البيانات.'},
+    {id:79,name:'R',cats:['data'],desc:'لغة تحليل إحصائي متقدمة ومفتوحة المصدر.',level:'advanced',url:'https://r-project.org',icon:'R',long:'R لغة برمجية متخصصة في التحليل الإحصائي والرسوم البيانية.',tips:'مثالية للتحليلات الإحصائية المتقدمة.'},
+    {id:80,name:'Python',cats:['data'],desc:'لغة برمجية قوية لتحليل البيانات.',level:'advanced',url:'https://python.org',icon:'P',long:'Python لغة برمجية شائعة لتحليل البيانات والذكاء الاصطناعي.',tips:'استخدمي مكتبات Pandas و Matplotlib.'},
+    {id:81,name:'SPSS',cats:['data'],desc:'برنامج تحليل إحصائي احترافي للأبحاث.',level:'advanced',url:'https://ibm.com/products/spss-statistics',icon:'S',long:'SPSS من IBM برنامج تحليل إحصائي احترافي مستخدم بكثرة في الأبحاث.',tips:'مناسب لتحليل بيانات الاستبيانات.'},
+    {id:82,name:'Tableau',cats:['data'],desc:'تصور البيانات بصرياً بشكل تفاعلي.',level:'intermediate',url:'https://tableau.com',icon:'T',long:'Tableau منصة تصور بيانات تفاعلية وقوية.',tips:'مفيدة لإنشاء لوحات معلومات تفاعلية.'},
+    {id:83,name:'Power BI',cats:['data'],desc:'تحليل وعرض البيانات من Microsoft.',level:'intermediate',url:'https://powerbi.com',icon:'P',long:'Power BI أداة تحليل وعرض بيانات متكاملة مع Microsoft.',tips:'متكاملة مع Excel بشكل ممتاز.'},
+    {id:84,name:'Jamovi',cats:['data'],desc:'برنامج إحصائي مفتوح المصدر سهل الاستخدام.',level:'intermediate',url:'https://jamovi.org',icon:'J',long:'Jamovi برنامج إحصائي مفتوح المصدر بواجهة سهلة يعتمد على R.',tips:'بديل مجاني وسهل لـ SPSS.'},
+    {id:85,name:'JASP',cats:['data'],desc:'برنامج إحصائي مجاني لتحليل البيانات.',level:'intermediate',url:'https://jasp-stats.org',icon:'J',long:'JASP برنامج إحصائي مجاني يدعم التحليل البايزي والتقليدي.',tips:'مفيد للتحليل الإحصائي المتقدم.'},
+
+    {id:86,name:'Scholarcy',cats:['reading','ai'],desc:'تلخيص الأوراق العلمية تلقائياً ببطاقات ذكية.',level:'intermediate',url:'https://scholarcy.com',icon:'S',long:'Scholarcy يلخص الأوراق العلمية إلى بطاقات ذكية مستخلصة.',tips:'ارفعي PDF ودعي الأداة تستخرج النقاط الأساسية.'},
+    {id:87,name:'ChatPDF',cats:['reading','ai'],desc:'محادثة مع ملفات PDF لاستخراج المعلومات.',level:'beginner',url:'https://chatpdf.com',icon:'C',long:'ChatPDF يتيح طرح أسئلة على ملف PDF للحصول على إجابات من محتواه.',tips:'استخدميه للبحث داخل أوراق طويلة.'},
+    {id:88,name:'PDF.ai',cats:['reading','ai'],desc:'محادثة وتلخيص ملفات PDF بسهولة.',level:'beginner',url:'https://pdf.ai',icon:'P',long:'PDF.ai أداة ذكية للتفاعل مع ملفات PDF عبر المحادثة.',tips:'مناسبة لمراجعة الأوراق بسرعة.'},
+    {id:89,name:'Explainpaper',cats:['reading','ai'],desc:'شرح الأوراق العلمية وتبسيط مفاهيمها.',level:'intermediate',url:'https://explainpaper.com',icon:'E',long:'Explainpaper يساعد على فهم الأوراق العلمية بشرح المفاهيم الصعبة.',tips:'اختاري النص الصعب واطلبي الشرح.'},
+    {id:90,name:'Lateral.io',cats:['reading'],desc:'تنظيم قراءة الأبحاث وتمييز الملاحظات.',level:'intermediate',url:'https://lateral.io',icon:'L',long:'Lateral.io منصة لتنظيم قراءة الأبحاث وتدوين الملاحظات وربطها.',tips:'مناسبة لمراجعة الأدبيات بشكل منظم.'}
+];
+
+const mastersGroups = [
+    {title:'لبداية البحث', icon:'🚀', desc:'أدوات لاختيار الفكرة وتحديد المسار البحثي', tools:['ChatGPT','Claude','Perplexity','MindMeister','Miro']},
+    {title:'للبحث عن الدراسات', icon:'🔍', desc:'أدوات للبحث في المصادر والدراسات السابقة', tools:['Elicit','Consensus','Semantic Scholar','ResearchRabbit','Connected Papers','Litmaps']},
+    {title:'لبناء الإطار النظري', icon:'🏗️', desc:'أدوات لتنظيم الإطار النظري والمفاهيم', tools:['Notion','Obsidian','Litmaps','Whimsical','Creately','Milanote']},
+    {title:'لتنظيم المراجع', icon:'📚', desc:'أدوات لإدارة المراجع والاستشهادات', tools:['Zotero','Mendeley','Scite','Connected Papers']},
+    {title:'للكتابة الأكاديمية', icon:'✍️', desc:'أدوات لتحرير الكتابة وتحسين الأسلوب', tools:['ChatGPT','Grammarly','QuillBot','Writefull','LanguageTool','DeepL']},
+    {title:'لإعداد العرض التقديمي', icon:'📊', desc:'أدوات لتصميم العروض التقديمية', tools:['Gamma','Canva','Beautiful.ai','PowerPoint','Google Slides','Tome']},
+    {title:'للعصف الذهني', icon:'🧠', desc:'أدوات لتوليد الأفكار وتنظيمها بصرياً', tools:['MindMeister','XMind','Coggle','Miro','FigJam','Mapify','Napkin AI']},
+    {title:'لتحليل البيانات', icon:'📈', desc:'أدوات لتحليل البيانات والإحصاء', tools:['SPSS','Jamovi','Excel','Google Sheets','Tableau','Power BI']},
+    {title:'لإنتاج المحتوى التعليمي', icon:'🎬', desc:'أدوات لإنتاج الفيديو والمحتوى التعليمي', tools:['Canva','CapCut','Gamma','Loom','Pictory','Synthesia','ElevenLabs']}
+];
+
+const steps = [
+    {num:1, title:'حددي هدفك', desc:'حددي بوضوح ما تريدين تحقيقه: بحثاً عن دراسات، كتابة أكاديمية، تصميم عرض، تنظيم مشروع، أو إنتاج محتوى تعليمي. تحديد الهدف يوجّه اختيار الأداة المناسبة.', icon:'🎯'},
+    {num:2, title:'اختاري التصنيف', desc:'تصفحي التصنيفات الاثني عشر واختاري الأنسب لهدفك البحثي. كل تصنيف يجمع أدوات متخصصة في مجال محدد.', icon:'🗂️'},
+    {num:3, title:'قارني الأدوات', desc:'استخدمي زر "معرفة المزيد" لمقارنة الأدوات ومستوى الاستخدام والمميزات قبل اتخاذ القرار.', icon:'⚖️'},
+    {num:4, title:'افتحي الموقع الرسمي', desc:'انتقلي إلى الموقع الرسمي للأداة عبر زر "زيارة الموقع" الذي يفتح في تبويب جديد.', icon:'🔗'},
+    {num:5, title:'جربي الأداة', desc:'أنشئي حساباً وجربي الأداة عملياً للتأكد من ملاءمتها لاحتياجك البحثي ومستوى مهارتك.', icon:'🧪'},
+    {num:6, title:'احفظي في المفضلة', desc:'أضيفي الأدوات المفيدة إلى المفضلة بالضغط على أيقونة القلب للوصول السريع إليها لاحقاً.', icon:'⭐'}
+];
+
+let state = {
+    search:'',
+    category:'all',
+    level:'all',
+    sortAlpha:false,
+    favoritesOnly:false,
+    favorites: JSON.parse(localStorage.getItem('favTools') || '[]')
+};
+
+function init() {
+    renderCategoryButtons();
+    applyFilters();
+    updateStats();
+    renderMasters();
+    renderSteps();
+}
+
+function renderCategoryButtons() {
+    const container = document.getElementById('categoryButtons');
+    container.innerHTML = categories.map(c => `
+        <button onclick="setCategory('${c.id}')" data-cat="${c.id}" class="cat-btn shrink-0 px-4 py-2 rounded-full text-sm font-semibold ${c.id === state.category ? 'bg-gradient-to-r from-navy to-brand-purple text-white shadow-md' : 'bg-white text-slate-700 border border-slate-200 hover:border-navy/40'}">
+            <span>${c.icon}</span>
+            <span class="mr-1">${c.short}</span>
+        </button>
+    `).join('');
+}
+
+function setCategory(id) {
+    state.category = id;
+    renderCategoryButtons();
+    applyFilters();
+}
+
+function handleSearch() {
+    state.search = document.getElementById('searchInput').value.trim().toLowerCase();
+    applyFilters();
+}
+
+function toggleSort() {
+    state.sortAlpha = !state.sortAlpha;
+    document.getElementById('sortLabel').textContent = state.sortAlpha ? 'ترتيب افتراضي' : 'ترتيب أبجدي';
+    applyFilters();
+}
+
+function toggleFavoritesOnly() {
+    state.favoritesOnly = !state.favoritesOnly;
+    const btn = document.getElementById('favBtn');
+    if (state.favoritesOnly) {
+        btn.classList.add('bg-rose-50','border-rose-300','text-rose-600');
+        btn.classList.remove('text-slate-700');
+    } else {
+        btn.classList.remove('bg-rose-50','border-rose-300','text-rose-600');
+        btn.classList.add('text-slate-700');
+    }
+    applyFilters();
+}
+
+function applyFilters() {
+    state.level = document.getElementById('levelFilter').value;
+    let filtered = tools.filter(t => {
+        if (state.category !== 'all' && !t.cats.includes(state.category)) return false;
+        if (state.level !== 'all' && t.level !== state.level) return false;
+        if (state.favoritesOnly && !state.favorites.includes(t.id)) return false;
+        if (state.search) {
+            const text = (t.name + ' ' + t.desc + ' ' + t.long + ' ' + t.cats.join(' ')).toLowerCase();
+            if (!text.includes(state.search)) return false;
+        }
+        return true;
+    });
+    if (state.sortAlpha) filtered = [...filtered].sort((a,b) => a.name.localeCompare(b.name));
+    renderTools(filtered);
+    document.getElementById('resultsCount').textContent = `عدد النتائج: ${filtered.length} أداة`;
+}
+
+function renderTools(list) {
+    const grid = document.getElementById('toolsGrid');
+    const empty = document.getElementById('emptyState');
+    if (list.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+    }
+    empty.classList.add('hidden');
+    grid.innerHTML = list.map((t,i) => {
+        const cat = categories.find(c => c.id === t.cats[0]);
+        const level = levelMap[t.level];
+        const isFav = state.favorites.includes(t.id);
+        return `
+        <div class="tool-card bg-white rounded-2xl p-5 border border-slate-100 shadow-sm animate-slide-up" style="animation-delay:${Math.min(i*25,250)}ms">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-navy/10 to-brand-purple/10 text-navy flex items-center justify-center text-xl font-bold border border-slate-100">${t.icon}</div>
+                    <div class="min-w-0">
+                        <div class="text-xs text-slate-400 font-medium">#${t.id}</div>
+                        <h3 class="font-bold text-slate-800 leading-tight truncate">${t.name}</h3>
+                    </div>
+                </div>
+                <button onclick="event.stopPropagation();toggleFav(${t.id})" class="p-1.5 rounded-lg hover:bg-rose-50 transition ${isFav ? 'text-rose-500' : 'text-slate-300'}" title="أضيفي للمفضلة">
+                    <svg width="20" height="20" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </button>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-3">
+                <span class="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-navy/10 text-navy font-semibold">${cat.icon} ${cat.short}</span>
+                <span class="text-xs px-2.5 py-1 rounded-full ${level.cls} font-semibold">${level.name}</span>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4 min-h-[60px]">${t.desc}</p>
+            <div class="flex gap-2">
+                <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="btn-primary flex-1 text-white text-sm font-semibold py-2.5 px-3 rounded-xl text-center flex items-center justify-center gap-1.5">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    زيارة الموقع
+                </a>
+                <button onclick="openModal(${t.id})" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold py-2.5 px-3 rounded-xl transition">معرفة المزيد</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function toggleFav(id) {
+    const idx = state.favorites.indexOf(id);
+    if (idx >= 0) state.favorites.splice(idx, 1);
+    else state.favorites.push(id);
+    localStorage.setItem('favTools', JSON.stringify(state.favorites));
+    applyFilters();
+    updateStats();
+    if (!document.getElementById('modal').classList.contains('hidden')) {
+        openModal(id);
+    }
+}
+
+function updateStats() {
+    document.getElementById('statTools').textContent = tools.length;
+    document.getElementById('statFav').textContent = state.favorites.length;
+}
+
+function openModal(id) {
+    const t = tools.find(x => x.id === id);
+    if (!t) return;
+    const allCats = t.cats.map(c => categories.find(x => x.id === c)).filter(Boolean);
+    const level = levelMap[t.level];
+    const isFav = state.favorites.includes(t.id);
+    document.getElementById('modalContent').innerHTML = `
+        <div class="p-6 sm:p-8">
+            <div class="flex items-start justify-between mb-5">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy to-brand-purple text-white flex items-center justify-center text-2xl font-bold shadow-lg">${t.icon}</div>
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">الأداة رقم ${t.id}</div>
+                        <h3 class="text-2xl font-bold text-slate-800">${t.name}</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500 transition">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-5">
+                ${allCats.map(c => `<span class="text-xs px-3 py-1.5 rounded-full bg-navy/10 text-navy font-semibold">${c.icon} ${c.name}</span>`).join('')}
+                <span class="text-xs px-3 py-1.5 rounded-full ${level.cls} font-semibold">${level.name}</span>
+            </div>
+            <div class="mb-5">
+                <h4 class="text-sm font-bold text-slate-700 mb-2 flex items-center gap-1.5">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    نظرة عامة
+                </h4>
+                <p class="text-slate-600 leading-relaxed">${t.long}</p>
+            </div>
+            <div class="mb-6 bg-amber-50 border-r-4 border-amber-400 p-4 rounded-xl">
+                <h4 class="text-sm font-bold text-amber-700 mb-1.5 flex items-center gap-1.5">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7c.5.4 1 .8 1 1.3h6c0-.5.5-.9 1-1.3A7 7 0 0012 2z"/></svg>
+                    نصيحة للاستخدام
+                </h4>
+                <p class="text-slate-700 text-sm leading-relaxed">${t.tips}</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="btn-primary flex-1 text-white font-semibold py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    زيارة الموقع الرسمي
+                </a>
+                <button onclick="toggleFav(${t.id})" class="px-4 py-3 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-700 font-semibold flex items-center justify-center gap-2 ${isFav ? 'text-rose-500 border-rose-300 bg-rose-50' : ''}">
+                    <svg width="18" height="18" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    ${isFav ? 'في المفضلة' : 'أضيفي للمفضلة'}
+                </button>
+            </div>
+        </div>
+    `;
+    document.getElementById('modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function showPage(page) {
+    ['home','masters','howto'].forEach(p => document.getElementById('page-' + p).classList.toggle('hidden', p !== page));
+    document.querySelectorAll('[data-nav]').forEach(b => {
+        if (b.dataset.nav === page) {
+            b.className = 'nav-link shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition bg-navy/10 text-navy';
+        } else {
+            b.className = 'nav-link shrink-0 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition';
+        }
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function resetFilters() {
+    state.search = '';
+    state.category = 'all';
+    state.level = 'all';
+    state.sortAlpha = false;
+    state.favoritesOnly = false;
+    document.getElementById('searchInput').value = '';
+    document.getElementById('levelFilter').value = 'all';
+    document.getElementById('sortLabel').textContent = 'ترتيب أبجدي';
+    document.getElementById('favBtn').classList.remove('bg-rose-50','border-rose-300','text-rose-600');
+    document.getElementById('favBtn').classList.add('text-slate-700');
+    renderCategoryButtons();
+    applyFilters();
+}
+
+function renderMasters() {
+    const container = document.getElementById('mastersContent');
+    container.innerHTML = mastersGroups.map((g, gi) => `
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm animate-slide-up" style="animation-delay:${gi*60}ms">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-navy to-brand-purple flex items-center justify-center text-2xl shadow-lg">${g.icon}</div>
+                <div>
+                    <h3 class="text-xl font-bold text-navy">${g.title}</h3>
+                    <p class="text-sm text-slate-500">${g.desc}</p>
+                </div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                ${g.tools.map(name => {
+                    const t = tools.find(x => x.name === name);
+                    if (!t) return '';
+                    const cat = categories.find(c => c.id === t.cats[0]);
+                    return `
+                    <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 bg-slate-50 hover:bg-navy/5 rounded-xl p-3 border border-slate-100 transition">
+                        <div class="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-200 flex items-center justify-center font-bold text-navy group-hover:bg-navy group-hover:text-white transition">${t.icon}</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-semibold text-sm text-slate-800 truncate">${t.name}</div>
+                            <div class="text-xs text-slate-500 truncate">${cat.icon} ${cat.short}</div>
+                        </div>
+                        <svg class="text-slate-400 group-hover:text-navy transition shrink-0" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                    </a>`;
+                }).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderSteps() {
+    const container = document.getElementById('stepsContent');
+    container.innerHTML = steps.map((s,i) => `
+        <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-100 shadow-sm flex items-start gap-5 animate-slide-up" style="animation-delay:${i*80}ms">
+            <div class="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-navy to-brand-purple text-white flex items-center justify-center text-2xl shadow-lg">${s.icon}</div>
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="text-xs font-bold text-brand-purple bg-brand-purple/10 px-2 py-0.5 rounded-full">الخطوة ${s.num}</span>
+                    <h3 class="font-bold text-lg text-slate-800">${s.title}</h3>
+                </div>
+                <p class="text-slate-600 leading-relaxed">${s.desc}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
